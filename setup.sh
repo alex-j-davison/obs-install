@@ -158,3 +158,34 @@ echo ""
 echo "Apply alias"
 . /etc/bash.bashrc
 echo ""
+
+echo "#############################"
+echo "# microk8s kubectl commands #"
+echo "#############################"
+echo ""
+
+echo "Get all the name spaces"
+sudo microk8s kubectl get all --all-namespaces
+echo ""
+
+echo "Get a list of pods, services deployments, replicaset"
+sudo microk8s kubectl get all
+echo ""
+
+echo "Get a list of all the pods"
+sudo microk8s kubectl get pods -A
+echo ""
+
+echo "Get a service"
+sudo microk8s kubectl get service
+echo ""
+
+echo "###########################################################"
+echo "# Install Splunk otel collector                           #"
+echo "# https://github.com/signalfx/splunk-otel-collector-chart #"
+echo "###########################################################"
+echo ""
+
+echo "Add Helm repo"
+sudo helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
+echo ""
