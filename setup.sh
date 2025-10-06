@@ -92,10 +92,6 @@ echo "Load micok8s config"
 microk8s config > config
 echo ""
 
-echo "Exit"
-exit
-echo ""
-
 echo "################"
 echo "# Install Brew #"
 echo "################"
