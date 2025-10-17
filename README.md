@@ -39,4 +39,4 @@ Steps:-
 
 6.
 
-<code> kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}' </code>
+<code> sudo microk8s kubectl patch deployment kubeinvaders -n kubeinvaders -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}' </code>
