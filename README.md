@@ -31,9 +31,13 @@ Steps:-
 
 <code> chmod +x step2.sh </code>
 
+<code> chmod +x step3.sh </code>
+
 
 4. Run setup
 
 <code> ./step1.sh </code>
 
 <code> ./step2.sh </code>
+
+<code> ./step3.sh </code>

@@ -43,7 +43,7 @@ echo 'alias helm=microk8s.helm' | sudo tee -a  /etc/bash.bashrc
 echo "Step 2/3: Add kubectl alias"
 echo 'alias kubectl=microk8s.kubectl' | sudo tee -a  /etc/bash.bashrc
 echo "Step 3/3: Load alias"
-source . /etc/bash.bashrc
+. /etc/bash.bashrc
 echo ""
 echo "##########"
 echo "# Reboot #"
