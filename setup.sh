@@ -2,7 +2,6 @@
 # Operating System: Ubuntu 20.04
 # Disk Storage 100 Gib SSD
 
-
 echo "###############################################################"
 echo "# Script: Step-1 Setup observability instance                 #"
 echo "# Description: To create a observability instance.            #"
