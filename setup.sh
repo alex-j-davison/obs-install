@@ -89,24 +89,9 @@ sudo microk8s kubectl create namespace kubeinvaders
 echo "Step 2/2: Inalling kubeinvaders"
 sudo microk8s helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
 echo ""
-echo "####################"
-echo "# Validate install #"
-echo "####################"
+echo "##########"
+echo "# Reboot #"
+echo "##########"
 echo ""
-echo "Step 1/2: Show all resources in microk8s"
-sudo microk8s kubectl get all --all-namespaces
-echo "Step 2/2: Helm repo list"
-helm repo list
-echo ""
-echo "########################"
-echo "# Setup Otel collector #"
-echo "########################"
-echo ""
-echo "Step 1/1:"
-echo "Example:-"
-echo "helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector"
-echo ""
-#kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'
-echo "Example:-"
-echo "kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'"
-echo ""
+echo "Step 1/1: Reboot"
+sudo reboot
