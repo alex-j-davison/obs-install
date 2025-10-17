@@ -27,9 +27,13 @@ Steps:-
 
 3. Change permissions on shell scripts to execution
 
-<code> chmod +x setup.sh </code>
+<code> chmod +x step1.sh </code>
+
+<code> chmod +x step2.sh </code>
 
 
 4. Run setup
 
-<code> ./setup.sh </code>
+<code> ./step1.sh </code>
+
+<code> ./step2.sh </code>
