@@ -22,56 +22,6 @@ echo "Update OS"
 sudo apt-get update
 echo ""
 
-echo "####################"
-echo "# Install microk8s #"
-echo "####################"
-echo ""
-
-echo "Install microk8s"
-sudo snap install microk8s --classic --channel=1.25/stable
-echo ""
-
-echo "Enable DNS"
-sudo microk8s enable dns 
-echo ""
-
-echo "Enable dashboard"
-sudo microk8s enable dashboard
-echo ""
-
-echo "Enable storage"
-sudo microk8s enable storage
-echo ""
-
-echo "Enable storage hostpath"
-sudo microk8s enable storage hostpath-storage rbac ingress
-echo ""
-
-echo "microk8s inspect for a deeper inspection"
-sudo microk8s inspect
-echo ""
-
-echo "################"
-echo "# Install Brew #"
-echo "################"
-echo ""
-
-echo "Install brew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-echo ""
-
-echo "Start brew installation"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-echo ""
-
-echo "Update build essential"
-sudo apt-get install build-essential
-echo ""
-
-echo "Install gcc"
-brew install gcc
-echo ""
-
 echo "################"
 echo "# Install helm #"
 echo "################"
@@ -187,4 +137,46 @@ echo ""
 
 echo "Change folder permission"
 sudo chown -f -R splunker ~/.kube
+echo ""
+
+echo "Go home"
+cd
+echo ""
+
+echo "####################"
+echo "# Install microk8s #"
+echo "####################"
+echo ""
+
+echo "Install microk8s"
+sudo snap install microk8s --classic --channel=1.25/stable
+echo ""
+
+echo "Enable DNS"
+sudo microk8s enable dns 
+echo ""
+
+echo "Enable dashboard"
+sudo microk8s enable dashboard
+echo ""
+
+echo "Enable storage"
+sudo microk8s enable storage
+echo ""
+
+echo "Enable storage hostpath"
+sudo microk8s enable storage hostpath-storage rbac ingress
+echo ""
+
+echo "microk8s inspect for a deeper inspection"
+sudo microk8s inspect
+echo ""
+
+echo "####################"
+echo "# Validate install #"
+echo "####################"
+echo ""
+
+echo "Get all the name spaces"
+sudo microk8s kubectl get all --all-namespaces
 echo ""
