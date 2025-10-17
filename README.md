@@ -4,14 +4,14 @@
 
 Script does the following:-
 
-1. Update OS
-2. Install microk8s 
-3. Creates alias
-4. Download kubeinvaders ()
-5. Download Otel collector
-6. Update repos
-7. Setups kubeinvaders 
-8. Setups microk8s config 
+* Update OS
+* Install microk8s 
+* Creates alias
+* Download kubeinvaders ()
+* Download Otel collector
+* Update repos
+* Setups kubeinvaders 
+* Setups microk8s config 
 
 ## Installation steps
 
