@@ -60,6 +60,27 @@ echo 'alias kubectl=microk8s.kubectl' | sudo tee -a  /etc/bash.bashrc
 echo "Step 3/3: Load alias"
 source . /etc/bash.bashrc
 echo ""
+echo "##########################"
+echo "# Setups microk8s config #"
+echo "##########################"
+echo ""
+echo "Step 1/8: Going home"
+cd $HOME
+echo "Step 2/8: Create folder"
+mkdir .kube
+echo "Step 3/8: Go in new folder"
+cd .kube
+echo "Step 4/8: Add group to user"
+sudo usermod -a -G microk8s splunker
+echo "Step 5/8: Change folder ownership"
+sudo chown -f -R splunker ~/.kube
+echo "Step 6/8: Create new group"
+sudo newgrp microk8s
+echo "Step 7/8: Export config"
+microk8s config > config
+echo "Step 8/8: Go home"
+cd $HOME
+echo ""
 echo "#########################"
 echo "# Download kubeinvaders #"
 echo "#########################"
@@ -88,27 +109,6 @@ echo "Step 1/2: Creating namespace"
 kubectl create namespace kubeinvaders
 echo "Step 2/2: Inalling kubeinvaders"
 helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
-echo ""
-echo "##########################"
-echo "# Setups microk8s config #"
-echo "##########################"
-echo ""
-echo "Step 1/8: Going home"
-cd $HOME
-echo "Step 2/8: Create folder"
-mkdir .kube
-echo "Step 3/8: Go in new folder"
-cd .kube
-echo "Step 4/8: Add group to user"
-sudo usermod -a -G microk8s splunker
-echo "Step 5/8: Change folder ownership"
-sudo chown -f -R splunker ~/.kube
-echo "Step 6/8: Create new group"
-sudo newgrp microk8s
-echo "Step 7/8: Export config"
-microk8s config > config
-echo "Step 8/8: Go home"
-cd $HOME
 echo ""
 echo "####################"
 echo "# Validate install #"
