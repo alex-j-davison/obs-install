@@ -4,7 +4,7 @@
 
 
 echo "###############################################################"
-echo "# Script: Step-2 Setup observability instance                 #"
+echo "# Script: Step-1 Setup observability instance                 #"
 echo "# Description: To create a observability instance.            #"
 echo "# Created date: 19/09/25                                      #"
 echo "# Arthur: Alex J Davison (alexdav@cisco.com)                  #"
