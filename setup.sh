@@ -12,183 +12,120 @@ echo "# Version: 0.0.1                                              #"
 echo "# Starting...                                                 #"
 echo "###############################################################"
 echo ""
-
 echo "###############"
 echo "# OS Commands #"
 echo "###############"
 echo ""
-
-echo "Update OS"
+echo "Step 1:"
 sudo apt-get update
 echo ""
-
 echo "################"
 echo "# Install helm #"
 echo "################"
 echo ""
-
-echo "Installing helm"
+echo "Step 1:"
 sudo snap install helm --classic
-echo ""
-
-echo "Starting installing helm"
+echo "Step 2:"
 curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-echo ""
-
-echo "Update transport https"
+echo "Step 3:"
 sudo apt-get install apt-transport-https --yes
-echo ""
-
-echo "Installation step of helm"
+echo "Step 4:"
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-echo ""
-
-echo "Install helm"
+echo "Step 5:"
 sudo apt-get install helm
 echo ""
-
 echo "################"
 echo "# Create alias #"
 echo "################"
 echo ""
-
-echo "Create alias for helm"
+echo "Step 1:"
 echo 'alias helm=microk8s.helm' | sudo tee -a  /etc/bash.bashrc
-echo ""
-
-echo "Create alias for kubectl"
+echo "Step 2:"
 echo 'alias kubectl=microk8s.kubectl' | sudo tee -a  /etc/bash.bashrc
-echo ""
-
-echo "Apply alias"
+echo "Step 3:"
 . /etc/bash.bashrc
 echo ""
-
 echo "#########################"
 echo "# Download kubeinvaders #"
 echo "#########################"
 echo ""
-
-echo "Add kubeinvaders repo"
+echo "Step 1:"
 helm repo add kubeinvaders https://lucky-sideburn.github.io/helm-charts/
-echo ""
-
-echo "Update repo"
+echo "Step 2:"
 helm repo update
 echo ""
-
 echo "###########################"
 echo "# Download Otel collector #"
 echo "###########################"
 echo ""
-
-echo "Add Otel Collect repo"
+echo "Step 1:"
 helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
-echo ""
-
-echo "Update repo"
+echo "Step 2:"
 helm repo update
 echo ""
-
 echo "####################"
 echo "# Install microk8s #"
 echo "####################"
 echo ""
-
-echo "Install microk8s"
+echo "Step 1:"
 sudo snap install microk8s --classic --channel=1.25/stable
-echo ""
-
-echo "Enable DNS"
+echo "Step 2:"
 sudo microk8s enable dns 
-echo ""
-
-echo "Enable dashboard"
+echo "Step 3:"
 sudo microk8s enable dashboard
-echo ""
-
-echo "Enable storage"
+echo "Step 4:"
 sudo microk8s enable storage
-echo ""
-
-echo "Enable storage hostpath"
+echo "Step 5:"
 sudo microk8s enable storage hostpath-storage rbac ingress
-echo ""
-
-echo "microk8s inspect for a deeper inspection"
+echo "Step 6:"
 sudo microk8s inspect
 echo ""
-
-echo "####################"
-echo "# Validate install #"
-echo "####################"
-echo ""
-
-echo "Get all the name spaces"
-sudo microk8s kubectl get all --all-namespaces
-echo ""
-
 echo "######################"
 echo "# Setup kubeinvaders #"
 echo "######################"
 echo ""
-
-echo "Add kubeinvaders namespace"
+echo "Step 1:"
 kubectl create namespace kubeinvaders
-echo ""
-
-echo "With ingress and TLS enabled"
+echo "Step 2:"
 helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
 echo ""
-
-echo "########################"
-echo "# Setup Otel collector #"
-echo "########################"
-echo ""
-
-#helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector
-echo "Example:-"
-echo "helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector"
-echo ""
-
-#kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'
-echo "Example:-"
-echo "kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'"
-echo ""
-
 echo "#########################"
 echo "# Setup microk8s config #"
 echo "#########################"
 echo ""
-
-echo "Go to home"
+echo "Step 1:"
 cd $HOME
-echo ""
-
-echo "Create .kube directory"
+echo "Step 2:"
 mkdir .kube
-echo ""
-
-echo "Go into .kube directory"
+echo "Step 3:"
 cd .kube
-echo ""
-
-echo "Load micok8s config"
+echo "Step 4:"
 microk8s config > config
-echo ""
-
-echo "Create new group"
+echo "Step 5:"
 newgrp microk8s
-echo ""
-
-echo "Change user settings"
+echo "Step 6:"
 sudo usermod -a -G microk8s splunker
-echo ""
-
-echo "Change folder permission"
+echo "Step 7:"
 sudo chown -f -R splunker ~/.kube
-echo ""
-
-echo "Go home"
+echo "Step 8:"
 cd
+echo ""
+echo "####################"
+echo "# Validate install #"
+echo "####################"
+echo ""
+echo "Step 1:"
+sudo microk8s kubectl get all --all-namespaces
+echo "########################"
+echo "# Setup Otel collector #"
+echo "########################"
+echo ""
+echo "Step 1:"
+#helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector
+echo "Example:-"
+echo "helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector"
+echo ""
+#kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'
+echo "Example:-"
+echo "kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'"
 echo ""
