@@ -32,7 +32,7 @@ echo "# Download kubeinvaders #"
 echo "#########################"
 echo ""
 echo "Step 1/1: Add kubeinvaders repo"
-helm repo add kubeinvaders https://lucky-sideburn.github.io/helm-charts/
+sudo helm microk8s repo add kubeinvaders https://lucky-sideburn.github.io/helm-charts/
 echo ""
 echo "###########################"
 echo "# Download Otel collector #"
