@@ -64,9 +64,9 @@ echo "Apply alias"
 . /etc/bash.bashrc
 echo ""
 
-echo "######################"
-echo "# Setup kubeinvaders #"
-echo "######################"
+echo "#########################"
+echo "# Download kubeinvaders #"
+echo "#########################"
 echo ""
 
 echo "Add kubeinvaders repo"
@@ -77,17 +77,9 @@ echo "Update repo"
 helm repo update
 echo ""
 
-echo "Add kubeinvaders namespace"
-kubectl create namespace kubeinvaders
-echo ""
-
-echo "With ingress and TLS enabled"
-helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
-echo ""
-
-echo "########################"
-echo "# Setup Otel collector #"
-echo "########################"
+echo "###########################"
+echo "# Download Otel collector #"
+echo "###########################"
 echo ""
 
 echo "Add Otel Collect repo"
@@ -96,14 +88,6 @@ echo ""
 
 echo "Update repo"
 helm repo update
-echo ""
-
-#helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector
-echo "helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector"
-echo ""
-
-#kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'
-echo "kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'"
 echo ""
 
 echo "#########################"
@@ -179,4 +163,32 @@ echo ""
 
 echo "Get all the name spaces"
 sudo microk8s kubectl get all --all-namespaces
+echo ""
+
+echo "######################"
+echo "# Setup kubeinvaders #"
+echo "######################"
+echo ""
+
+echo "Add kubeinvaders namespace"
+kubectl create namespace kubeinvaders
+echo ""
+
+echo "With ingress and TLS enabled"
+helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
+echo ""
+
+echo "########################"
+echo "# Setup Otel collector #"
+echo "########################"
+echo ""
+
+#helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector
+echo "Example:-"
+echo "helm install splunk-otel-collector --set="splunkObservability.accessToken=UkWiTCjeB_S0whQbIzNh2g,clusterName=SMEObs1,splunkObservability.realm=us1,gateway.enabled=false,splunkPlatform.endpoint=http://10.236.6.77:8088/services/collector/event,splunkPlatform.token=9609730b-994a-41a8-b72f-3b5d8d42e5c0,splunkObservability.profilingEnabled=true,environment=ajdSMEObs1Test,operatorcrds.install=true,operator.enabled=true,agent.discovery.enabled=true" splunk-otel-collector-chart/splunk-otel-collector"
+echo ""
+
+#kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'
+echo "Example:-"
+echo "kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'"
 echo ""
