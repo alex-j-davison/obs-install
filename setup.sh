@@ -19,21 +19,21 @@ echo ""
 echo "Step 1/1: Updating OS"
 sudo apt-get update
 echo ""
-echo "################"
-echo "# Install helm #"
-echo "################"
-echo ""
-echo "Step 1/5: Install helm"
-sudo snap install helm --classic
-echo "Step 2/5:"
-curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-echo "Step 3/5:"
-sudo apt-get install apt-transport-https --yes
-echo "Step 4/5:"
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-echo "Step 5/5: Updating helm" 
-sudo apt-get install helm
-echo ""
+#echo "################"
+#echo "# Install helm #"
+#echo "################"
+#echo ""
+#echo "Step 1/5: Install helm"
+#sudo snap install helm --classic
+#echo "Step 2/5:"
+#curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+#echo "Step 3/5:"
+#sudo apt-get install apt-transport-https --yes
+#echo "Step 4/5:"
+#echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+#echo "Step 5/5: Updating helm" 
+#sudo apt-get install helm
+#echo ""
 echo "####################"
 echo "# Install microk8s #"
 echo "####################"
