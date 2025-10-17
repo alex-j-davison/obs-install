@@ -12,21 +12,21 @@ echo "# Version: 0.0.1                                              #"
 echo "# Starting...                                                 #"
 echo "###############################################################"
 echo ""
-echo "##########################"
-echo "# Setups microk8s config #"
-echo "##########################"
-echo ""
-echo "Step 1/5: Going home"
-cd $HOME
-echo "Step 2/5: Create folder"
-mkdir .kube
-echo "Step 3/5: Go in new folder"
-cd .kube
-echo "Step 4/5: Export config"
-microk8s config > config
-echo "Step 5/5: Go home"
-cd $HOME
-echo ""
+#echo "##########################"
+#echo "# Setups microk8s config #"
+#echo "##########################"
+#echo ""
+#echo "Step 1/5: Going home"
+#cd $HOME
+#echo "Step 2/5: Create folder"
+#mkdir .kube
+#echo "Step 3/5: Go in new folder"
+#cd .kube
+#echo "Step 4/5: Export config"
+#microk8s config > config
+#echo "Step 5/5: Go home"
+#cd $HOME
+#echo ""
 echo "#########################"
 echo "# Download kubeinvaders #"
 echo "#########################"
