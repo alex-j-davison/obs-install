@@ -4,13 +4,61 @@
 
 
 echo "###############################################################"
-echo "# Script: Step-2 Setup observability instance                 #"
+echo "# Script: Step-1 Setup observability instance                 #"
 echo "# Description: To create a observability instance.            #"
 echo "# Created date: 19/09/25                                      #"
 echo "# Arthur: Alex J Davison (alexdav@cisco.com)                  #"
 echo "# Version: 0.0.1                                              #"
 echo "# Starting...                                                 #"
 echo "###############################################################"
+echo ""
+echo "#############"
+echo "# Update OD #"
+echo "#############"
+echo ""
+echo "Step 1/1: Updating OS"
+sudo apt-get update
+echo ""
+echo "################"
+echo "# Install helm #"
+echo "################"
+echo ""
+echo "Step 1/5: Install helm"
+sudo snap install helm --classic
+echo "Step 2/5:"
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+echo "Step 3/5:"
+sudo apt-get install apt-transport-https --yes
+echo "Step 4/5:"
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+echo "Step 5/5: Updating helm" 
+sudo apt-get install helm
+echo ""
+echo "####################"
+echo "# Install microk8s #"
+echo "####################"
+echo ""
+echo "Step 1/5: Install microk8s"
+sudo snap install microk8s --classic --channel=1.25/stable
+echo "Step 2/5: Enable DNS"
+sudo microk8s enable dns 
+echo "Step 3/5: Enable dashboard"
+sudo microk8s enable dashboard
+echo "Step 4/5: Enable storage"
+sudo microk8s enable storage
+echo "Step 5/5: Enable storage path"
+sudo microk8s enable storage hostpath-storage rbac ingress
+echo ""
+echo "#################"
+echo "# Creates alias #"
+echo "#################"
+echo ""
+echo "Step 1/3: Add helm alias"
+echo 'alias helm=microk8s.helm' | sudo tee -a  /etc/bash.bashrc
+echo "Step 2/3: Add kubectl alias"
+echo 'alias kubectl=microk8s.kubectl' | sudo tee -a  /etc/bash.bashrc
+echo "Step 3/3: Load alias"
+source . /etc/bash.bashrc
 echo ""
 echo "#########################"
 echo "# Download kubeinvaders #"
@@ -51,16 +99,16 @@ echo "Step 2/8: Create folder"
 mkdir .kube
 echo "Step 3/8: Go in new folder"
 cd .kube
-echo "Step 4/8: Export config"
-microk8s config > config
-echo "Step 5/8: Go home"
-cd $HOME
+echo "Step 4/8: Add group to user"
+sudo usermod -a -G microk8s splunker
+echo "Step 5/8: Change folder ownership"
+sudo chown -f -R splunker ~/.kube
 echo "Step 6/8: Create new group"
 sudo newgrp microk8s
-echo "Step 7/8: Add group to user"
-sudo usermod -a -G microk8s splunker
-echo "Step 8/8: Change folder ownership"
-sudo chown -f -R splunker ~/.kube
+echo "Step 7/8: Export config"
+microk8s config > config
+echo "Step 8/8: Go home"
+cd $HOME
 echo ""
 echo "####################"
 echo "# Validate install #"
