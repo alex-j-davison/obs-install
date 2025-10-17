@@ -90,43 +90,6 @@ echo "Update repo"
 helm repo update
 echo ""
 
-echo "#########################"
-echo "# Setup microk8s config #"
-echo "#########################"
-echo ""
-
-echo "Go to home"
-cd $HOME
-echo ""
-
-echo "Create .kube directory"
-mkdir .kube
-echo ""
-
-echo "Go into .kube directory"
-cd .kube
-echo ""
-
-echo "Load micok8s config"
-microk8s config > config
-echo ""
-
-echo "Create new group"
-newgrp microk8s
-echo ""
-
-echo "Change user settings"
-sudo usermod -a -G microk8s splunker
-echo ""
-
-echo "Change folder permission"
-sudo chown -f -R splunker ~/.kube
-echo ""
-
-echo "Go home"
-cd
-echo ""
-
 echo "####################"
 echo "# Install microk8s #"
 echo "####################"
@@ -191,4 +154,41 @@ echo ""
 #kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'
 echo "Example:-"
 echo "kubectl patch deployment <my-deployment> -n <my-namespace> -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}'"
+echo ""
+
+echo "#########################"
+echo "# Setup microk8s config #"
+echo "#########################"
+echo ""
+
+echo "Go to home"
+cd $HOME
+echo ""
+
+echo "Create .kube directory"
+mkdir .kube
+echo ""
+
+echo "Go into .kube directory"
+cd .kube
+echo ""
+
+echo "Load micok8s config"
+microk8s config > config
+echo ""
+
+echo "Create new group"
+newgrp microk8s
+echo ""
+
+echo "Change user settings"
+sudo usermod -a -G microk8s splunker
+echo ""
+
+echo "Change folder permission"
+sudo chown -f -R splunker ~/.kube
+echo ""
+
+echo "Go home"
+cd
 echo ""
