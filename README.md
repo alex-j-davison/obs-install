@@ -1,4 +1,4 @@
-# Overview
+# Obs install
 
 ## Scope of script
 
@@ -40,3 +40,7 @@ Steps:-
 6.
 
 <code> sudo microk8s kubectl patch deployment kubeinvaders -n kubeinvaders -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}' </code>
+
+## Change log
+
+### Version 1.0.0
