@@ -88,6 +88,22 @@ sudo microk8s kubectl create namespace kubeinvaders
 echo "Step 2/2: Inalling kubeinvaders"
 sudo microk8s helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
 echo ""
+echo "######################"
+echo "# Python application #"
+echo "######################"
+echo ""
+echo "Step 1/1: Install splunk-opentelemetry"
+pip install splunk-opentelemetry[all]
+echo "Step 1/2: Set the OTEL_SERVICE_NAME environment variable"
+export OTEL_SERVICE_NAME=ajdService
+echo ""
+echo "######################"
+echo "# Python application #"
+echo "######################"
+echo ""
+echo "Step 1/1: Install jar"
+curl -L https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent.jar -o splunk-otel-javaagent.jar
+echo ""
 echo "##########"
 echo "# Reboot #"
 echo "##########"
