@@ -104,6 +104,13 @@ echo ""
 echo "Step 1/1: Install java instrumentation."
 curl -L https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent.jar -o splunk-otel-javaagent.jar
 echo ""
+echo "##################"
+echo "# Install GitHub #"
+echo "##################"
+echo ""
+echo "Step 1/1: Install github."
+sudo snap install gh
+echo ""
 echo "##########"
 echo "# Reboot #"
 echo "##########"
