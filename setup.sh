@@ -101,7 +101,7 @@ echo "######################"
 echo "# Python application #"
 echo "######################"
 echo ""
-echo "Step 1/1: Install jar"
+echo "Step 1/1: Install java instrumentation."
 curl -L https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent.jar -o splunk-otel-javaagent.jar
 echo ""
 echo "##########"
