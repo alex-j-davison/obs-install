@@ -27,7 +27,7 @@ Steps:-
 
 3. Change permissions on shell scripts to execution
 
-<code> chmod +x setup.sh </code>
+<code> chmod +x setup.sh >> setupLog.log</code>
 
 4. Run setup
 
