@@ -24,6 +24,9 @@ echo "####################"
 echo ""
 echo "Step 1/5: Install microk8s"
 sudo snap install microk8s --classic --channel=1.25/stable
+sudo usermod -a -G microk8s $USER
+mkdir -p ~/.kube
+chmod 0700 ~/.kube
 echo "Step 2/5: Enable DNS"
 sudo microk8s enable dns 
 echo "Step 4/5: Enable storage"
@@ -83,22 +86,6 @@ echo "Step 1/2: Creating namespace"
 sudo microk8s kubectl create namespace kubeinvaders
 echo "Step 2/2: Installing kubeinvaders"
 sudo microk8s helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
-echo ""
-echo "######################"
-echo "# Python application #"
-echo "######################"
-echo ""
-echo "Step 1/1: Install splunk-opentelemetry"
-pip install splunk-opentelemetry[all]
-echo "Step 1/2: Set the OTEL_SERVICE_NAME environment variable"
-export OTEL_SERVICE_NAME=ajdService
-echo ""
-echo "######################"
-echo "# Python application #"
-echo "######################"
-echo ""
-echo "Step 1/1: Install java instrumentation."
-curl -L https://github.com/signalfx/splunk-otel-java/releases/latest/download/splunk-otel-javaagent.jar -o splunk-otel-javaagent.jar
 echo ""
 echo "##################"
 echo "# Install GitHub #"
