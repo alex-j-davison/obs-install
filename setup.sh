@@ -27,21 +27,18 @@ sudo snap install microk8s --classic --channel=1.25/stable
 sudo usermod -a -G microk8s $USER
 mkdir -p ~/.kube
 chmod 0700 ~/.kube
-echo "Step 2/5: Enable DNS"
-sudo microk8s enable dns 
-echo "Step 4/5: Enable storage"
-sudo microk8s enable hostpath-storage
+sudo microk8s enable dns rbac hostpath-storage helm3
 echo ""
 echo "#################"
 echo "# Creates alias #"
 echo "#################"
 echo ""
 echo "Step 1/3: Add helm alias"
-echo 'alias helm=microk8s.helm' | sudo tee -a  /etc/bash.bashrc
+echo "alias kubectl='microk8s kubectl'" >> .bash_aliases
 echo "Step 2/3: Add kubectl alias"
-echo 'alias kubectl=microk8s.kubectl' | sudo tee -a  /etc/bash.bashrc
+echo "alias helm='microk8s helm3'" >> .bash_aliases
 echo "Step 3/3: Load alias"
-. /etc/bash.bashrc
+source ~/.bash_aliases
 echo ""
 echo "##########################"
 echo "# Setups microk8s config #"
@@ -71,6 +68,11 @@ echo "###########################"
 echo ""
 echo "Step 1/1: Adding otel collector"
 sudo microk8s helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
+sudo helm show values splunk-otel-collector-chart/splunk-otel-collector > values.yaml
+sudo microk8s kubectl create ns <name_of_namespace>
+sudo microk8s helm -n <name_space> install <your_cluster_name> -f values.yaml splunk-otel-collector-chart/splunk-otel-collector
+sudo microk8s kubectl -n <name_space> get pods
+sudo microk8s kubectl -n <name_space> logs -f <collector_agent_pod> 
 echo ""
 echo "################"
 echo "# Update repos #"
