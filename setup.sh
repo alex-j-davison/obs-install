@@ -26,12 +26,8 @@ echo "Step 1/5: Install microk8s"
 sudo snap install microk8s --classic --channel=1.25/stable
 echo "Step 2/5: Enable DNS"
 sudo microk8s enable dns 
-echo "Step 3/5: Enable dashboard"
-sudo microk8s enable dashboard
 echo "Step 4/5: Enable storage"
-sudo microk8s enable storage
-echo "Step 5/5: Enable storage path"
-sudo microk8s enable storage hostpath-storage rbac ingress
+sudo microk8s enable hostpath-storage
 echo ""
 echo "#################"
 echo "# Creates alias #"
