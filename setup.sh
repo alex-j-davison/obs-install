@@ -24,18 +24,22 @@ echo "####################"
 echo ""
 echo "Step 1/5: Install microk8s"
 sudo snap install microk8s --classic --channel=1.25/stable
+echo "Step 2/5: Create group"
 sudo usermod -a -G microk8s $USER
+echo "Step 3/5: Make directory"
 mkdir -p ~/.kube
+echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
+echo "Step 5/5: Enable features for microk8s"
 sudo microk8s enable dns rbac hostpath-storage helm3
 echo ""
 echo "#################"
 echo "# Creates alias #"
 echo "#################"
 echo ""
-echo "Step 1/3: Add helm alias"
+echo "Step 1/3: Add kubectl alias"
 echo "alias kubectl='microk8s kubectl'" >> .bash_aliases
-echo "Step 2/3: Add kubectl alias"
+echo "Step 2/3: Add helm alias"
 echo "alias helm='microk8s helm3'" >> .bash_aliases
 echo "Step 3/3: Load alias"
 source ~/.bash_aliases
@@ -55,30 +59,29 @@ sudo microk8s config > config
 echo "Step 5/5: Go home"
 cd $HOME
 echo ""
-echo "#########################"
-echo "# Download kubeinvaders #"
-echo "#########################"
+echo "######################"
+echo "# Download helm repo #"
+echo "######################"
 echo ""
-echo "Step 1/1: Add kubeinvaders repo"
+echo "Step 1/3: Add kubeinvaders repo"
 sudo microk8s helm repo add kubeinvaders https://lucky-sideburn.github.io/helm-charts/
-echo ""
-echo "###########################"
-echo "# Download Otel collector #"
-echo "###########################"
-echo ""
-echo "Step 1/1: Adding otel collector"
+echo "Step 2/3: Adding otel collector"
 sudo microk8s helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
-sudo helm show values splunk-otel-collector-chart/splunk-otel-collector > values.yaml
-sudo microk8s kubectl create ns <name_of_namespace>
-sudo microk8s helm -n <name_space> install <your_cluster_name> -f values.yaml splunk-otel-collector-chart/splunk-otel-collector
-sudo microk8s kubectl -n <name_space> get pods
-sudo microk8s kubectl -n <name_space> logs -f <collector_agent_pod> 
-echo ""
-echo "################"
-echo "# Update repos #"
-echo "################"
-echo "Step 1/1: Updating helm repos"
+echo "Step 3/4: Updating helm repos"
 sudo microk8s helm repo update
+echo ""
+echo "######################"
+echo "# Setups Splunk Otel #"
+echo "######################"
+echo ""
+echo "Step 1/3: Add kubeinvaders repo"
+sudo helm show values splunk-otel-collector-chart/splunk-otel-collector > values.yaml
+echo "Step 1/3: Add kubeinvaders repo"
+sudo microk8s kubectl create ns splunkotel
+echo "Step 1/3: Add kubeinvaders repo"
+sudo microk8s helm -n splunkotel install ajdnewcluster -f values.yaml splunk-otel-collector-chart/splunk-otel-collector
+echo "Step 1/3: Add kubeinvaders repo"
+sudo microk8s kubectl -n splunkotel get pods
 echo ""
 echo "#######################"
 echo "# Setups kubeinvaders #"
@@ -96,9 +99,13 @@ echo ""
 echo "Step 1/1: Install github."
 sudo snap install gh
 echo ""
-echo "##########"
-echo "# Reboot #"
-echo "##########"
+echo "################"
+echo "# Setup GitHub #"
+echo "################"
 echo ""
-echo "Step 1/1: Reboot"
-sudo reboot
+echo "Step 1/3: Clone repo"
+git clone https://github.com/alex-j-davison/obs-helm.git 
+echo "Step 2/3: Move directory"
+cd obs-helm/
+echo "Step 3/3: Change permissions on shell script"
+chmod +x installhelm.sh 

@@ -33,16 +33,16 @@ Steps:-
 
 <code> ./setup.sh </code>
 
-5. Install helm
+## Notes:- 
 
 <code>https://github.com/alex-j-davison/obs-helm</code>
 
-6. Path application for APM
+### Path application for APM
 
 <code> sudo microk8s kubectl patch deployment kubeinvaders -n kubeinvaders -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}' </code>
 
 
-7. Forward port
+### Forward port
 
 <code> kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
 
