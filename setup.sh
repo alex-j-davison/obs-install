@@ -37,12 +37,12 @@ echo "#################"
 echo "# Creates alias #"
 echo "#################"
 echo ""
-echo "Step 1/3: Add kubectl alias"
-echo "alias kubectl='microk8s kubectl'" >> .bash_aliases
-echo "Step 2/3: Add helm alias"
-echo "alias helm='microk8s helm3'" >> .bash_aliases
+echo "Step 1/3: Add helm alias"
+echo 'alias helm=microk8s.helm' | sudo tee -a  /etc/bash.bashrc
+echo "Step 2/3: Add kubectl alias"
+echo 'alias kubectl=microk8s.kubectl' | sudo tee -a  /etc/bash.bashrc
 echo "Step 3/3: Load alias"
-source ~/.bash_aliases
+. /etc/bash.bashrc
 echo ""
 echo "##########################"
 echo "# Setups microk8s config #"
