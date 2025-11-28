@@ -101,6 +101,14 @@ echo "Step 1/3: Create splunkotel namespace"
 sudo microk8s kubectl create ns splunkotel
 echo "Step 2/3: Install new config to namespace splunkotel"
 sudo microk8s helm -n splunkotel install ajdnewcluster -f obs-helm/newinstall.yaml splunk-otel-collector-chart/splunk-otel-collector
+
+total_seconds=15
+while [ $total_seconds -gt 0 ]; do
+    printf "Time remaining: %d seconds\r" "$total_seconds"
+    sleep 1
+    total_seconds=$((total_seconds - 1))
+done
+
 echo "Step 3/3: List pods in splunkotel"
 sudo microk8s kubectl -n splunkotel get pods
 echo ""
