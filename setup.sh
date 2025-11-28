@@ -27,7 +27,7 @@ sudo snap install microk8s --classic --channel=1.25/stable
 echo "Step 2/5: Create group"
 sudo usermod -a -G microk8s $USER
 echo "Step 3/5: Make directory"
-mkdir -p ~/.kube
+sudo mkdir -p ~/.kube
 echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
 echo "Step 5/5: Enable features for microk8s"
@@ -51,11 +51,11 @@ echo ""
 echo "Step 1/5: Going home"
 cd $HOME
 echo "Step 2/5: Create folder"
-mkdir .kube
+sudo mkdir .kube
 echo "Step 3/5: Go in new folder"
 cd .kube
 echo "Step 4/5: Export config"
-sudo microk8s config > config
+sudo microk8s config >> config
 echo "Step 5/5: Go home"
 cd $HOME
 echo ""
@@ -74,13 +74,13 @@ echo "######################"
 echo "# Setups Splunk Otel #"
 echo "######################"
 echo ""
-echo "Step 1/3: Add kubeinvaders repo"
-sudo helm show values splunk-otel-collector-chart/splunk-otel-collector > values.yaml
-echo "Step 1/3: Add kubeinvaders repo"
+echo "Step 1/5: Get values"
+sudo microk8s helm show values splunk-otel-collector-chart/splunk-otel-collector > values.yaml
+echo "Step 2/2: Create splunkotel namespace"
 sudo microk8s kubectl create ns splunkotel
-echo "Step 1/3: Add kubeinvaders repo"
+echo "Step 3/3: Install new config to namespace splunkotel"
 sudo microk8s helm -n splunkotel install ajdnewcluster -f values.yaml splunk-otel-collector-chart/splunk-otel-collector
-echo "Step 1/3: Add kubeinvaders repo"
+echo "Step 4/4: List pods in splunkotel"
 sudo microk8s kubectl -n splunkotel get pods
 echo ""
 echo "#######################"

@@ -7,7 +7,7 @@ Script does the following:-
 * Update OS
 * Install microk8s 
 * Creates alias
-* Download kubeinvaders ()
+* Download kubeinvaders
 * Download Otel collector
 * Update repos
 * Setups kubeinvaders 
@@ -19,19 +19,19 @@ Steps:-
 
 1. Clone repo
 
-<code> git clone https://github.com/alex-j-davison/obs-install.git </code>
+<code>git clone https://github.com/alex-j-davison/obs-install.git</code>
 
 2. Change directory
 
-<code> cd obs-install/ </code>
+<code>cd obs-install/</code>
 
 3. Change permissions on shell scripts to execution
 
-<code> chmod +x setup.sh >> setupLog.log</code>
+<code>chmod +x setup.sh</code>
 
 4. Run setup
 
-<code> ./setup.sh </code>
+<code>./setup.sh | tee setupLog.log</code>
 
 ## Notes:- 
 
