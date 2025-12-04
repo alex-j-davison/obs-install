@@ -21,17 +21,13 @@ Steps:-
 
 <code>git clone https://github.com/alex-j-davison/obs-install.git</code>
 
-2. Change directory
+2. Change permissions on shell scripts to execution
 
-<code>cd obs-install/</code>
+<code>chmod +x /obs-install/setup.sh</code>
 
-3. Change permissions on shell scripts to execution
+3. Run setup
 
-<code>chmod +x setup.sh</code>
-
-4. Run setup
-
-<code>./setup.sh | tee setupLog.log</code>
+<code>./obs-install/setup.sh | tee setupLog.log</code>
 
 ## Notes:- 
 

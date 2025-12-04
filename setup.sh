@@ -12,11 +12,13 @@ echo "# Starting...                                                 #"
 echo "###############################################################"
 echo ""
 echo "#############"
-echo "# Update OD #"
+echo "# Update OS #"
 echo "#############"
 echo ""
-echo "Step 1/1: Updating OS"
+echo "Step 1/2: Updating OS"
 sudo apt-get update
+echo "Step 1/2: Disable firewall"
+sudo ufw disable
 echo ""
 echo "####################"
 echo "# Install microk8s #"
@@ -31,7 +33,7 @@ sudo mkdir -p ~/.kube
 echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
 echo "Step 5/5: Enable features for microk8s"
-sudo microk8s enable dns rbac hostpath-storage helm3
+sudo microk8s enable dns:8.8.8.8 rbac hostpath-storage helm3
 echo ""
 echo "#################"
 echo "# Creates alias #"
@@ -79,6 +81,13 @@ sudo microk8s kubectl create namespace kubeinvaders
 echo "Step 2/2: Installing kubeinvaders"
 sudo microk8s helm install --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.image.tag=latest -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
 echo ""
+echo "################"
+echo "# Setups nginx #"
+echo "################"
+echo ""
+echo "Step 1/1: Creating nginx"
+sudo microk8s kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+echo ""
 echo "##################"
 echo "# Install GitHub #"
 echo "##################"
@@ -90,14 +99,14 @@ echo "################"
 echo "# Setup GitHub #"
 echo "################"
 echo ""
-echo "Step 1/3: Clone repo"
+echo "Step 1/1: Clone repo obs-helm"
 git clone https://github.com/alex-j-davison/obs-helm.git 
 echo ""
 echo "######################"
 echo "# Setups Splunk Otel #"
 echo "######################"
 echo ""
-echo "Step 1/3: Create splunkotel namespace"
+echo "Step 1/3: Create otel namespace"
 sudo microk8s kubectl create ns otel
 echo "Step 2/3: Install new config to namespace splunkotel"
 sudo microk8s helm -n otel install splunk-otel-collector --values ./obs-helm/newinstall.yaml splunk-otel-collector-chart/splunk-otel-collector
@@ -109,6 +118,6 @@ while [ $total_seconds -gt 0 ]; do
     total_seconds=$((total_seconds - 1))
 done
 
-echo "Step 3/3: List pods in splunkotel"
-sudo microk8s kubectl -n splunkotel get pods
+echo "Step 3/3: List everything"
+sudo microk8s kubectl get all --all-namespaces
 echo ""
