@@ -21,9 +21,9 @@ echo "Step 2/3: Disable firewall"
 sudo ufw disable
 echo "Step 3/3: Get DNS values"
 sudo resolvectl >> ip.log
-cat ip.log | grep -n "Current DNS Server:" * > dns.log
+cat ip.log | grep "Current DNS Server:" * > dns.log
 dnsvalue=`cat dns.log`
-dnsvalue=${dnsvalue#"Current DNS Server: "}
+dnsvalue=${dnsvalue:20}
 echo $dnsvalue
 echo ""
 echo "####################"

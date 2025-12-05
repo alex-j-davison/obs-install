@@ -23,7 +23,7 @@ Steps:-
 
 2. Change permissions on shell scripts to execution
 
-<code>chmod +x /obs-install/setup.sh</code>
+<code>chmod +x obs-install/setup.sh</code>
 
 3. Run setup
 
