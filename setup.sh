@@ -15,29 +15,29 @@ echo "#############"
 echo "# Update OS #"
 echo "#############"
 echo ""
-echo "Step 1/9: Updating OS"
+echo "Step 1/12: Updating OS"
 sudo apt-get update
-echo "Step 2/9: Disable firewall"
+echo "Step 2/12: Disable firewall"
 sudo ufw disable
-echo "Step 3/9: Get IP values"
+echo "Step 3/12: Get IP values"
 sudo resolvectl >> ip.log
-echo "Step 4/9: Find DNS servers"
+echo "Step 4/12: Find DNS servers"
 cat ip.log | grep "DNS Servers: " * > dns.log
-echo "Step 5/9: Remove IP values file"
+echo "Step 5/12: Remove IP values file"
 rm ip.log
-echo "Step 6/9: Load DNS values into memory"
+echo "Step 6/12: Load DNS values into memory"
 dnsvalue=`cat dns.log`
-echo "Step 7/9: Trim crap"
+echo "Step 7/12: Trim crap"
 dnsvalue=${dnsvalue:27}
-echo "Step 8/9: Write new trimmed DNS values"
+echo "Step 8/12: Write new trimmed DNS values"
 echo $dnsvalue >> new_dns.log
-echo "Step 9/9: Remove DNS values file"
+echo "Step 9/12: Remove DNS values file"
 rm dns.log
-echo "Step 10/9: Format DNS servers"
-sed -i ' ' -g -new ',' new_dns.log
-echo "Step 11/9: Load new DNS values"
+echo "Step 10/12: Format DNS servers"
+sed -i 's/ /,/g' new_dns.log
+echo "Step 11/12: Load new DNS values"
 dnsvalue=`cat new_dns.log`
-echo "Step 9/9: Clean up"
+echo "Step 12/12: Clean up"
 rm new_dns.log
 echo ""
 echo "####################"
