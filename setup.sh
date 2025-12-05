@@ -28,7 +28,7 @@ rm ip.log
 echo "Step 6/9: Load DNS values into memory"
 dnsvalue=`cat dns.log`
 echo "Step 7/9: Trim crap"
-dnsvalue=${dnsvalue:20}
+dnsvalue=${dnsvalue:27}
 echo "Step 8/9: Print DNS values"
 echo $dnsvalue
 echo "Step 9/9: Remove DNS values file"
