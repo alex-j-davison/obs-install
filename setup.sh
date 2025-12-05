@@ -15,30 +15,28 @@ echo "#############"
 echo "# Update OS #"
 echo "#############"
 echo ""
-echo "Step 1/12: Updating OS"
+echo "Step 1/11: Updating OS"
 sudo apt-get update
-echo "Step 2/12: Disable firewall"
-sudo ufw disable
-echo "Step 3/12: Get IP values"
+echo "Step 2/11: Get IP values"
 sudo resolvectl >> ip.log
-echo "Step 4/12: Find DNS servers"
+echo "Step 3/11: Find DNS servers"
 cat ip.log | grep "DNS Servers: " * > dns.log
-echo "Step 5/12: Remove IP values file"
+echo "Step 4/11: Remove IP values file"
 rm ip.log
-echo "Step 6/12: Load DNS values into memory"
+echo "Step 5/11: Load DNS values into memory"
 dnsvalue=`cat dns.log`
-echo "Step 7/12: Trim crap"
+echo "Step 6/11: Trim crap"
 dnsvalue=${dnsvalue:27}
-echo "Step 8/12: Write new trimmed DNS values"
+echo "Step 7/11: Write new trimmed DNS values"
 echo $dnsvalue >> new_dns.log
-echo "Step 9/12: Remove DNS values file"
+echo "Step 8/11: Remove DNS values file"
 rm dns.log
-echo "Step 10/12: Format DNS servers"
+echo "Step 9/11: Format DNS servers"
 sed -i 's/ /,/g' new_dns.log
-echo "Step 11/12: Load new DNS values"
+echo "Step 10/11: Load new DNS values"
 cat new_dns.log
 dnsvalue=`cat new_dns.log`
-echo "Step 12/12: Clean up"
+echo "Step 11/11: Clean up"
 rm new_dns.log
 echo ""
 echo "####################"
@@ -54,11 +52,11 @@ sudo mkdir -p ~/.kube
 echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
 echo "Step 5/5: Enable features for microk8s"
-sudo microk8s enable dns:$dnsvalue rbac hostpath-storage helm3
+sudo microk8s enable dns:$dnsvalue rbac hostpath-storage
 echo ""
-echo "#################"
-echo "# Creates alias #"
-echo "#################"
+echo "##########################"
+echo "# Creates microk8s alias #"
+echo "##########################"
 echo ""
 echo "Step 1/3: Add helm alias"
 echo 'alias helm=microk8s.helm' | sudo tee -a  /etc/bash.bashrc

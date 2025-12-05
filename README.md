@@ -1,17 +1,23 @@
 # Obs install
 
-## Scope of script
+## Description
 
 Script does the following:-
 
 * Update OS
+* Get DNS values
 * Install microk8s 
-* Creates alias
-* Download kubeinvaders
-* Download Otel collector
-* Update repos
-* Setups kubeinvaders 
-* Setups microk8s config 
+* Creates microk8s alias
+* Setup microk8s configs
+* Download Helm Repos (Update repos)
+    * kubeinvaders
+    * otel collector
+* Setup pods:-
+    * kubeinvaders
+    * nginx
+* Install github
+* Clone helm repo
+* Setup otel collector
 
 ## Installation steps
 
@@ -29,19 +35,19 @@ Steps:-
 
 <code>./obs-install/setup.sh | tee setupLog.log</code>
 
-## Notes:- 
 
-<code>https://github.com/alex-j-davison/obs-helm</code>
-
-### Path application for APM
-
-<code> sudo microk8s kubectl patch deployment kubeinvaders -n kubeinvaders -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-python":"default/splunk-otel-collector"}}}}}' </code>
-
+## User guide
 
 ### Forward port
 
 <code> kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
 
-## Change log
+## Release
+
+### Notes:-
 
 ### Version 1.0.0
+
+## References:- 
+
+<code>https://github.com/alex-j-davison/obs-helm</code>
