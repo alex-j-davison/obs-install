@@ -15,10 +15,16 @@ echo "#############"
 echo "# Update OS #"
 echo "#############"
 echo ""
-echo "Step 1/2: Updating OS"
+echo "Step 1/3: Updating OS"
 sudo apt-get update
-echo "Step 1/2: Disable firewall"
+echo "Step 2/3: Disable firewall"
 sudo ufw disable
+echo "Step 3/3: Get DNS values"
+sudo resolvectl >> ip.log
+cat ip.log | grep -n "DNS Servers:" * > dns.log
+dnsvalue=`cat dns.log`
+dnsvalue=${dnsvalue#"Current DNS Server: "}
+echo $dnsvalue
 echo ""
 echo "####################"
 echo "# Install microk8s #"
@@ -33,7 +39,7 @@ sudo mkdir -p ~/.kube
 echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
 echo "Step 5/5: Enable features for microk8s"
-sudo microk8s enable dns:8.8.8.8 rbac hostpath-storage helm3
+sudo microk8s enable dns:$dnsvalue rbac hostpath-storage helm3
 echo ""
 echo "#################"
 echo "# Creates alias #"
