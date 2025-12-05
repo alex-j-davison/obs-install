@@ -29,10 +29,14 @@ echo "Step 6/9: Load DNS values into memory"
 dnsvalue=`cat dns.log`
 echo "Step 7/9: Trim crap"
 dnsvalue=${dnsvalue:27}
-echo "Step 8/9: Print DNS values"
-echo $dnsvalue
+echo "Step 8/9: Write new trimmed DNS values"
+echo $dnsvalue >> new_dns.log
 echo "Step 9/9: Remove DNS values file"
 rm dns.log
+echo "Step 10/9: Format DNS servers"
+sed -i ' ' -g -new ',' new_dns.log
+echo "Step 11/9: Load new DNS values"
+dnsvalue=`cat new_dns.log`
 echo ""
 echo "####################"
 echo "# Install microk8s #"
