@@ -15,16 +15,24 @@ echo "#############"
 echo "# Update OS #"
 echo "#############"
 echo ""
-echo "Step 1/3: Updating OS"
+echo "Step 1/9: Updating OS"
 sudo apt-get update
-echo "Step 2/3: Disable firewall"
+echo "Step 2/9: Disable firewall"
 sudo ufw disable
-echo "Step 3/3: Get DNS values"
+echo "Step 3/9: Get IP values"
 sudo resolvectl >> ip.log
-cat ip.log | grep "Current DNS Server:" * > dns.log
+echo "Step 4/9: Find DNS servers"
+cat ip.log | grep "DNS Servers: " * > dns.log
+echo "Step 5/9: Remove IP values file"
+rm ip.log
+echo "Step 6/9: Load DNS values into memory"
 dnsvalue=`cat dns.log`
+echo "Step 7/9: Trim crap"
 dnsvalue=${dnsvalue:20}
+echo "Step 8/9: Print DNS values"
 echo $dnsvalue
+echo "Step 9/9: Remove DNS values file"
+rm dns.log
 echo ""
 echo "####################"
 echo "# Install microk8s #"
