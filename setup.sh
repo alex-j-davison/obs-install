@@ -36,6 +36,7 @@ rm dns.log
 echo "Step 10/12: Format DNS servers"
 sed -i 's/ /,/g' new_dns.log
 echo "Step 11/12: Load new DNS values"
+cat new_dns.log
 dnsvalue=`cat new_dns.log`
 echo "Step 12/12: Clean up"
 rm new_dns.log
