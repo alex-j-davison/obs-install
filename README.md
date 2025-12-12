@@ -35,13 +35,6 @@ Steps:-
 
 <code>./obs-install/setup.sh | tee setupLog.log</code>
 
-
-## User guide
-
-### Forward port
-
-<code> kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
-
 ## Release
 
 ### Notes:-
