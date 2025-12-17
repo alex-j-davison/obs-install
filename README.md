@@ -52,7 +52,7 @@ Steps:-
 ### Start dashboard
 sudo microk8s dashboard-proxy
 
-## Create cluster https://microk8s.io/docs/clustering
+### Create cluster https://microk8s.io/docs/clustering
 sudo microk8s add-node
 
 vi /etc/hosts
@@ -62,6 +62,10 @@ Add it
 10.202.36.106 ip-10-202-36-106
 
 10.202.34.204 ip-10-202-34-204
+
+### Forward port
+
+<code> kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
 
 ## References:- 
 
