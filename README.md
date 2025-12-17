@@ -46,3 +46,9 @@ Steps:-
 ## References:- 
 
 <code>https://github.com/alex-j-davison/obs-helm</code>
+
+
+## User Guide  
+
+### Start dashboard
+sudo microk8s dashboard-proxy
