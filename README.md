@@ -81,4 +81,4 @@ https://canonical.com/microk8s
 https://helm.sh/docs/helm/helm
 
 ### Helm Rep
-<code>https://github.com/alex-j-davison/obs-helm</code>
+https://github.com/alex-j-davison/obs-helm
