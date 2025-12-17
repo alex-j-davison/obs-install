@@ -39,16 +39,33 @@ Steps:-
 
 ### Notes:-
 
+### Version 2.0.0
+
+* 
+
 ### Version 1.0.0
 
 * Initial setup
-
-## References:- 
-
-<code>https://github.com/alex-j-davison/obs-helm</code>
-
 
 ## User Guide  
 
 ### Start dashboard
 sudo microk8s dashboard-proxy
+
+## Create cluster https://microk8s.io/docs/clustering
+sudo microk8s add-node
+
+vi /etc/hosts
+
+Add it
+
+10.202.36.106 ip-10-202-36-106
+
+10.202.34.204 ip-10-202-34-204
+
+## References:- 
+
+https://helm.sh/docs/helm/helm
+
+### Helm Rep
+<code>https://github.com/alex-j-davison/obs-helm</code>
