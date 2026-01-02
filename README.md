@@ -35,13 +35,31 @@ Steps:-
 
 <code>./obs-install/setup.sh | tee setupLog.log</code>
 
+4. Modify user
+
+<code>sudo usermod -a -G microk8s splunker</code>
+
+5. Change owner
+
+<code>sudo chown -f -R splunker ~/.kube</code>
+
+6. Create new group
+
+<code>newgrp microk8s</code>
+
 ## Release
 
 ### Notes:-
 
 ### Version 2.0.0
 
-* 
+* Update README
+* Enable microk8s add-ons:-
+    * ingress 
+    * helm3
+    * dashboard
+    * storage
+* Remove groups changes
 
 ### Version 1.0.0
 
@@ -49,13 +67,17 @@ Steps:-
 
 ## User Guide  
 
-### Start dashboard
-sudo microk8s dashboard-proxy
+### Start microk8s dashboard
 
-### Create cluster https://microk8s.io/docs/clustering
-sudo microk8s add-node
+<code>sudo microk8s dashboard-proxy</code>
 
-vi /etc/hosts
+### Create cluster 
+
+https://microk8s.io/docs/clustering
+
+<code>sudo microk8s add-node</code>
+
+<code>vi /etc/hosts</code>
 
 Add it
 
@@ -64,6 +86,8 @@ Add it
 10.202.34.204 ip-10-202-34-204
 
 ### Forward port
+
+Forward UI port to local host
 
 <code> kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
 

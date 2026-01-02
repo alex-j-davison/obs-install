@@ -43,21 +43,15 @@ echo "####################"
 echo "# Install microk8s #"
 echo "####################"
 echo ""
-echo "Step 1/7: Install microk8s"
+echo "Step 1/5: Install microk8s"
 sudo snap install microk8s --classic --channel=1.25/stable
-echo "Step 2/7: Create group"
+echo "Step 2/5: Create group"
 sudo usermod -a -G microk8s $USER
-echo "Step 3/7: Make directory"
+echo "Step 3/5: Make directory"
 sudo mkdir -p ~/.kube
-echo "Step 4/7: Change permission on folder"
+echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
-echo "Step 5/7: Change permission for user splunker"
-sudo usermod -a -G microk8s splunker
-echo "Step 6/7: Change permission on folder"
-sudo chown -f -R splunker ~/.kube
-# echo "Step 7/8: Load new permissions"
-# newgrp microk8s
-echo "Step 7/7: Enable features for microk8s"
+echo "Step 5/5: Enable features for microk8s"
 sudo microk8s enable dns:$dnsvalue rbac hostpath-storage ingress helm3 dashboard storage
 echo ""
 echo "##########################"
