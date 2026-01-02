@@ -104,15 +104,14 @@ echo "################"
 echo "# Setups nginx #"
 echo "################"
 echo ""
-echo "Step 1/1: Creating nginx"
+echo "Step 1-2/5: Creating namespace 1 and 2"
+sudo microk8s kubectl create namespace namespace1
+sudo microk8s kubectl create namespace namespace2
+echo "Step 3/5: Creating nginx"
 sudo microk8s kubectl apply -f https://k8s.io/examples/application/deployment.yaml
-echo ""
-echo "##################"
-echo "# Install GitHub #"
-echo "##################"
-echo ""
-echo "Step 1/1: Install github."
-sudo snap install gh
+echo "Step 4-5/5: Deploy 10 nginx per namespace"
+kubectl create deploy nginx --image=nginx --replicas=10 -n namespace1
+kubectl create deploy nginx --image=nginx --replicas=10 -n namespace2
 echo ""
 echo "################"
 echo "# Setup GitHub #"
