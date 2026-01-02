@@ -56,7 +56,7 @@ sudo usermod -a -G microk8s splunker
 echo "Step 6/8: Change permission on folder"
 sudo chown -f -R splunker ~/.kube
 echo "Step 7/8: Load new permissions"
-newgrp microk8s
+# newgrp microk8s
 echo "Step 8/8: Enable features for microk8s"
 sudo microk8s enable dns:$dnsvalue rbac hostpath-storage ingress helm3 dashboard storage
 echo ""
