@@ -89,7 +89,21 @@ Add it
 
 Forward UI port to local host
 
-<code> kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
+<code>kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
+
+### Access kubeinvaders alias
+
+NOTE, THESE CHANGES TAKE PLACE ON LOCAL HOST (Mac), NOT ON REMOTE HOST.
+
+<code>sudo vi /etc/hosts</code>
+
+Add
+
+<code>IP_REMOTE_HOST   kubeinvaders.local</code>
+
+Example
+
+<code>10.236.39.254   kubeinvaders.local</code>
 
 ## References:- 
 
