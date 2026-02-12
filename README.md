@@ -89,7 +89,15 @@ Add it
 
 Forward UI port to local host
 
-<code>kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
+<code>sudo microk8s kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
+
+### Add annotation for prometheus port
+
+Example:-
+<code>sudo microk8s kubectl annotate pod/<POD_NAME> -n <NAMESPACE> prometheus.io/port=8080</code>
+
+Example:-
+<code>sudo microk8s kubectl annotate pod/kubeinvaders-58545d54cd-kwdpf -n kubeinvaders prometheus.io/port=8080</code>
 
 ### Access kubeinvaders alias
 
