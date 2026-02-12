@@ -52,7 +52,7 @@ sudo mkdir -p ~/.kube
 echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
 echo "Step 5/5: Enable features for microk8s"
-sudo microk8s enable dns:$dnsvalue hostpath-storage ingress helm3 dashboard storage
+sudo microk8s enable dns:$dnsvalue hostpath-storage ingress rbac helm3 dashboard storage
 echo ""
 echo "##########################"
 echo "# Creates microk8s alias #"
