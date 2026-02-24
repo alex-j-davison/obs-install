@@ -35,21 +35,96 @@ Steps:-
 
 <code>./obs-install/setup.sh | tee setupLog.log</code>
 
+4. Modify user
 
-## User guide
+<code>sudo usermod -a -G microk8s splunker</code>
 
-### Forward port
+5. Change owner
 
-<code> kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
+<code>sudo chown -f -R splunker ~/.kube</code>
+
+6. Create new group
+
+<code>newgrp microk8s</code>
 
 ## Release
 
 ### Notes:-
 
+### Version 2.0.0
+
+* Update README
+* Enable microk8s add-ons:-
+    * ingress 
+    * helm3
+    * dashboard
+    * storage
+* Remove groups changes
+
 ### Version 1.0.0
 
 * Initial setup
 
+## User Guide  
+
+### Start microk8s dashboard
+
+<code>sudo microk8s dashboard-proxy</code>
+
+### Create cluster 
+
+https://microk8s.io/docs/clustering
+
+<code>sudo microk8s add-node</code>
+
+<code>vi /etc/hosts</code>
+
+Add it
+
+10.202.36.106 ip-10-202-36-106
+
+10.202.34.204 ip-10-202-34-204
+
+### Forward port
+
+Forward UI port to local host
+
+<code>sudo microk8s kubectl port-forward svc/kubeinvaders -n kubeinvaders 8080:80 --address='0.0.0.0'</code>
+
+### Add annotation for prometheus port
+
+Example:-
+<code>sudo microk8s kubectl annotate pod/<POD_NAME> -n <NAMESPACE> prometheus.io/port=8080</code>
+
+Example:-
+<code>sudo microk8s kubectl annotate pod/kubeinvaders-58545d54cd-kwdpf -n kubeinvaders prometheus.io/port=8080</code>
+
+### Access kubeinvaders alias
+
+NOTE, THESE CHANGES TAKE PLACE ON LOCAL HOST (Mac), NOT ON REMOTE HOST.
+
+<code>sudo vi /etc/hosts</code>
+
+Add
+
+<code>IP_REMOTE_HOST   kubeinvaders.local</code>
+
+Example
+
+<code>10.236.39.254   kubeinvaders.local</code>
+
 ## References:- 
 
-<code>https://github.com/alex-j-davison/obs-helm</code>
+### kubernetes
+
+https://kubernetes.io/docs/home/
+
+### microk8s
+
+https://canonical.com/microk8s
+
+### helm 
+https://helm.sh/docs/helm/helm
+
+### Helm Rep
+https://github.com/alex-j-davison/obs-helm

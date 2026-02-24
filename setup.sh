@@ -52,7 +52,7 @@ sudo mkdir -p ~/.kube
 echo "Step 4/5: Change permission on folder"
 chmod 0700 ~/.kube
 echo "Step 5/5: Enable features for microk8s"
-sudo microk8s enable dns:$dnsvalue rbac hostpath-storage
+sudo microk8s enable dns:$dnsvalue hostpath-storage ingress rbac helm3 dashboard storage
 echo ""
 echo "##########################"
 echo "# Creates microk8s alias #"
@@ -104,15 +104,14 @@ echo "################"
 echo "# Setups nginx #"
 echo "################"
 echo ""
-echo "Step 1/1: Creating nginx"
+echo "Step 1-2/5: Creating namespace 1 and 2"
+sudo microk8s kubectl create namespace namespace1
+sudo microk8s kubectl create namespace namespace2
+echo "Step 3/5: Creating nginx"
 sudo microk8s kubectl apply -f https://k8s.io/examples/application/deployment.yaml
-echo ""
-echo "##################"
-echo "# Install GitHub #"
-echo "##################"
-echo ""
-echo "Step 1/1: Install github."
-sudo snap install gh
+echo "Step 4-5/5: Deploy 10 nginx per namespace"
+sudo microk8s kubectl create deploy nginx --image=nginx --replicas=10 -n namespace1
+sudo microk8s kubectl create deploy nginx --image=nginx --replicas=10 -n namespace2
 echo ""
 echo "################"
 echo "# Setup GitHub #"
