@@ -127,7 +127,7 @@ echo ""
 echo "Step 1/3: Create otel namespace"
 sudo microk8s kubectl create ns otel
 echo "Step 2/3: Install new config to namespace splunkotel"
-sudo microk8s helm -n otel install splunk-otel-collector --values ./obs-helm/newinstall.yaml splunk-otel-collector-chart/splunk-otel-collector
+sudo microk8s helm -n otel install splunk-otel-collector --values ./obs-helm/examples/SMEObs/SMEObs.yaml splunk-otel-collector-chart/splunk-otel-collector
 
 total_seconds=15
 while [ $total_seconds -gt 0 ]; do
