@@ -94,7 +94,7 @@ Forward UI port to local host
 ### Add annotation for prometheus port
 
 Example:-
-<code>sudo microk8s kubectl annotate pod/<POD_NAME> -n <NAMESPACE> prometheus.io/port=8080</code>
+<code>sudo microk8s kubectl annotate pod/<POD_NAME> -n /<NAMESPACE> prometheus.io/port=8080</code>
 
 Example:-
 <code>sudo microk8s kubectl annotate pod/kubeinvaders-58545d54cd-kwdpf -n kubeinvaders prometheus.io/port=8080</code>
