@@ -85,7 +85,7 @@ echo "# Download helm repo #"
 echo "######################"
 echo ""
 echo "Step 1/3: Add kubeinvaders repo"
-sudo microk8s helm repo add kubeinvaders https://alex-j-davison.github.io/kubeinvadershelm/
+sudo microk8s helm repo add kubeinvaders https://lucky-sideburn.github.io/helm-charts/
 echo "Step 2/3: Adding otel collector"
 sudo microk8s helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
 echo "Step 3/4: Updating helm repos"
@@ -98,7 +98,7 @@ echo ""
 echo "Step 1/2: Creating namespace"
 sudo microk8s kubectl create namespace kubeinvaders
 echo "Step 2/2: Installing kubeinvaders"
-sudo microk8s helm install --version v1.9.7 --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.imagePullPolicy.tag=Never --set deployment.image.tag=v1.9.7 -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
+sudo microk8s helm install --version v1.9.6 --set-string config.target_namespace="namespace1\,namespace2" --set ingress.enabled=true --set ingress.hostName=kubeinvaders.local --set deployment.imagePullPolicy.tag=Never --set deployment.image.tag=v1.9.6 -n kubeinvaders kubeinvaders kubeinvaders/kubeinvaders --set ingress.tls_enabled=true
 echo ""
 echo "################"
 echo "# Setups nginx #"
