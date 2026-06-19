@@ -85,7 +85,7 @@ echo "# Download helm repo #"
 echo "######################"
 echo ""
 echo "Step 1/3: Add kubeinvaders repo"
-sudo microk8s helm repo add kubeinvaders https://lucky-sideburn.github.io/helm-charts/
+sudo microk8s helm repo add kubeinvaders https://alex-j-davison.github.io/kubeinvadershelm/
 echo "Step 2/3: Adding otel collector"
 sudo microk8s helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
 echo "Step 3/4: Updating helm repos"
