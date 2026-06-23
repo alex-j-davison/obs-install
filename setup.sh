@@ -133,6 +133,7 @@ total_seconds=180
 while [ $total_seconds -gt 0 ]; do
     printf "Time remaining: %d seconds\r" "$total_seconds"
     sleep 1
+    clear
     total_seconds=$((total_seconds - 1))
 done
 
